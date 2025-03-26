@@ -1,0 +1,29 @@
+image: mcr.microsoft.com/dotnet/sdk:6.0
+
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  DOTNET_VERSION: "8.0"
+
+before_script:
+  - dotnet --version
+
+build:
+  stage: build
+  script:
+    - dotnet restore
+    - dotnet build --configuration Release
+
+test:
+  stage: test
+  script:
+    - dotnet test --configuration Release
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying to server..."
+
